@@ -8,7 +8,7 @@
             justify-content: center;
             align-items: flex-start;
             height: 100vh;
-            margin: 20px 0 0; /* Add margin at the top */
+            margin: 20px 0 0;
         }
 
         .container {
@@ -28,20 +28,21 @@
         }
 
         .check-icon {
-            color: grey;
+            color: #979797;
             margin-right: 10px;
         }
 
         .check-icon.green {
-            color: green;
+            color: #31a02b;
         }
 
         #confirm-button {
             padding: 10px 20px;
-            background-color: #007bff;
+            background-color: #c51f1f;
             color: white;
             border: none;
             cursor: pointer;
+            border-radius: 8px;
         }
 
         #confirm-button:disabled {
@@ -49,10 +50,9 @@
             cursor: not-allowed;
         }
 
-        /* Media Query for smartphones */
         @media screen and (max-width: 480px) {
             .container {
-                font-size: 18px; /* Increase font size for smaller screens */
+                font-size: 18px;
             }
         }
     </style>
@@ -63,15 +63,15 @@
         <input type="password" id="password" onkeyup="validatePassword()" style="width: 100%; font-size: 16px;">
 
         <div class="password-container">
-            <i id="length-icon" class="check-icon fas fa-check"></i>
+            <i id="length-icon" class="check-icon fas fa-check-circle"></i>
             <span>8 characters minimum</span>
         </div>
         <div class="password-container">
-            <i id="uppercase-icon" class="check-icon fas fa-check"></i>
+            <i id="uppercase-icon" class="check-icon fas fa-check-circle"></i>
             <span>At least one uppercase</span>
         </div>
         <div class="password-container">
-            <i id="numeric-icon" class="check-icon fas fa-check"></i>
+            <i id="numeric-icon" class="check-icon fas fa-check-circle"></i>
             <span>At least one numeric</span>
         </div>
 
@@ -92,9 +92,9 @@
             const numericIcon = document.getElementById("numeric-icon");
             const confirmButton = document.getElementById("confirm-button");
 
-            lengthIcon.className = isLengthValid ? "check-icon fas fa-check green" : "check-icon fas fa-check";
-            uppercaseIcon.className = isUppercaseValid ? "check-icon fas fa-check green" : "check-icon fas fa-check";
-            numericIcon.className = isNumericValid ? "check-icon fas fa-check green" : "check-icon fas fa-check";
+            lengthIcon.className = isLengthValid ? "check-icon fas fa-check-circle green" : "check-icon fas fa-check-circle";
+            uppercaseIcon.className = isUppercaseValid ? "check-icon fas fa-check-circle green" : "check-icon fas fa-check-circle";
+            numericIcon.className = isNumericValid ? "check-icon fas fa-check-circle green" : "check-icon fas fa-check-circle";
 
             const num = (isLengthValid ? 1 : 0) + (isUppercaseValid ? 1 : 0) + (isNumericValid ? 1 : 0);
             confirmButton.disabled = num !== 3;
