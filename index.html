@@ -48,12 +48,19 @@
             background-color: grey;
             cursor: not-allowed;
         }
+
+        /* Media Query for smartphones */
+        @media screen and (max-width: 480px) {
+            .container {
+                font-size: 18px; /* Increase font size for smaller screens */
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <label for="password">Password:</label>
-        <input type="password" id="password" onkeyup="validatePassword()" style="width: 100%;">
+        <input type="password" id="password" onkeyup="validatePassword()" style="width: 100%; font-size: 16px;">
 
         <div class="password-container">
             <i id="length-icon" class="check-icon fas fa-check"></i>
