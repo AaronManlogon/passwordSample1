@@ -5,28 +5,34 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
     <style>
         body {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            height: 100vh;
-            margin: 20px 0 0;
+            margin: 0;
+            padding: 0;
             font-family: 'Roboto', sans-serif;
+            background-color: #f0f0f0;
         }
-
+		
+		img {
+			border-radius: 10px;
+			margin-top: 10px;
+			margin-bottom: 40px;
+		}
         .container {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            width: 100%;
-            max-width: 400px;
-            padding: 20px;
-            box-sizing: border-box;
-        }
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: flex-start;
+			min-height: 100vh;
+			padding: 20px;
+			margin: 0 10px 0; /* Updated margin */
+			box-sizing: border-box;
+		}
+
 
         .password-container {
             display: flex;
             align-items: center;
             margin-bottom: 10px;
+            justify-content: flex-start;
         }
 
         .check-icon {
@@ -42,11 +48,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 20px;
+            margin-top: 60px;
             width: 100%;
         }
 
         #confirm-button {
+			font-size: 16px;
             padding: 12px 24px;
             background-color: #c51f1f;
             color: white;
@@ -60,45 +67,127 @@
             cursor: not-allowed;
         }
 
+        #show-password-container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        #show-password-checkbox {
+            display: none;
+        }
+
+        #show-password-label {
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .eye-icon {
+            color: #979797;
+            cursor: pointer;
+        }
+
+        .eye-icon.fa-eye-slash {
+            display: none;
+        }
+
+        #password::placeholder {
+            color: #979797;
+        }
+
+        .requirements {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-top: 10px;
+        }
+
+        .requirements-text {
+            margin-left: 10px;
+        }
+
         @media screen and (max-width: 480px) {
             .container {
-                font-size: 20px;
+                font-size: 18px;
             }
             .check-icon {
-                font-size: 24px;
+                font-size: 22px;
             }
             .password-container {
-                margin-bottom: 15px;
+                margin-bottom: 14px;
+            }
+            #confirm-button {
+                padding: 16px 32px;
+            }
+            #password {
+                font-size: 20px;
+                padding: 10px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <label for="password">Password:</label>
-        <input type="password" id="password" onkeyup="validatePassword()" style="width: 100%; font-size: 18px;">
+		<img src="31Logo.png" alt="Logo" style="max-width: 90%; height: auto;">
+        <div id="show-password-container">
+            <input type="password" id="password" placeholder="Password" onkeyup="validatePassword()" style="width: 100%;">
+            <label id="show-password-label">
+                <input type="checkbox" id="show-password-checkbox">
+                <i id="eye-icon" class="eye-icon fas fa-eye"></i>
+                <i id="eye-slash-icon" class="eye-icon fas fa-eye-slash"></i>
+            </label>
+        </div>
 
-        <div class="password-container">
-            <i id="length-icon" class="check-icon fas fa-check-circle"></i>
-            <span>8 characters minimum</span>
-        </div>
-        <div class="password-container">
-            <i id="uppercase-icon" class="check-icon fas fa-check-circle"></i>
-            <span>At least one uppercase</span>
-        </div>
-        <div class="password-container">
-            <i id="numeric-icon" class="check-icon fas fa-check-circle"></i>
-            <span>At least one numeric</span>
+        <div class="requirements">
+            <div class="password-container">
+                <i id="length-icon" class="check-icon fas fa-check-circle"></i>
+                <span class="requirements-text">8 characters minimum</span>
+            </div>
+            <div class="password-container">
+                <i id="uppercase-icon" class="check-icon fas fa-check-circle" style="margin-left: 0;"></i>
+                <span class="requirements-text">At least one uppercase</span>
+            </div>
+            <div class="password-container">
+                <i id="numeric-icon" class="check-icon fas fa-check-circle" style="margin-left: 0;"></i>
+                <span class="requirements-text">At least one numeric</span>
+            </div>
         </div>
 
         <div id="confirm-button-container">
-            <button id="confirm-button" disabled>Confirm</button>
+            <button id="confirm-button" disabled>CONFIRM</button>
         </div>
     </div>
 
     <script>
+        const passwordInput = document.getElementById("password");
+        const showPasswordCheckbox = document.getElementById("show-password-checkbox");
+        const eyeIcon = document.getElementById("eye-icon");
+        const eyeSlashIcon = document.getElementById("eye-slash-icon");
+		const confirmButton = document.getElementById("confirm-button");
+
+        confirmButton.addEventListener("click", function() {
+            // Change the background color to #720000 when clicked
+            confirmButton.style.backgroundColor = "#720000";
+        });
+
+        passwordInput.type = "password";
+        eyeSlashIcon.style.display = "none";
+
+        showPasswordCheckbox.addEventListener("change", function() {
+            if (showPasswordCheckbox.checked) {
+                passwordInput.type = "text";
+                eyeIcon.style.display = "none";
+                eyeSlashIcon.style.display = "inline";
+            } else {
+                passwordInput.type = "password";
+                eyeIcon.style.display = "inline";
+                eyeSlashIcon.style.display = "none";
+            }
+        });
+
         function validatePassword() {
-            const passwordInput = document.getElementById("password");
             const password = passwordInput.value;
 
             const isLengthValid = password.length >= 8;
