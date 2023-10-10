@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
     <style>
         body {
@@ -9,6 +10,7 @@
             align-items: flex-start;
             height: 100vh;
             margin: 20px 0 0;
+            font-family: 'Roboto', sans-serif;
         }
 
         .container {
@@ -36,8 +38,16 @@
             color: #31a02b;
         }
 
+        #confirm-button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            width: 100%;
+        }
+
         #confirm-button {
-            padding: 10px 20px;
+            padding: 12px 24px;
             background-color: #c51f1f;
             color: white;
             border: none;
@@ -52,7 +62,13 @@
 
         @media screen and (max-width: 480px) {
             .container {
-                font-size: 18px;
+                font-size: 20px;
+            }
+            .check-icon {
+                font-size: 24px;
+            }
+            .password-container {
+                margin-bottom: 15px;
             }
         }
     </style>
@@ -60,7 +76,7 @@
 <body>
     <div class="container">
         <label for="password">Password:</label>
-        <input type="password" id="password" onkeyup="validatePassword()" style="width: 100%; font-size: 16px;">
+        <input type="password" id="password" onkeyup="validatePassword()" style="width: 100%; font-size: 18px;">
 
         <div class="password-container">
             <i id="length-icon" class="check-icon fas fa-check-circle"></i>
@@ -75,7 +91,9 @@
             <span>At least one numeric</span>
         </div>
 
-        <button id="confirm-button" disabled>Confirm</button>
+        <div id="confirm-button-container">
+            <button id="confirm-button" disabled>Confirm</button>
+        </div>
     </div>
 
     <script>
